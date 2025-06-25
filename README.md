@@ -16,21 +16,24 @@ Ambiente WordPress completo com Docker + MySQL + phpMyAdmin.
 ```bash
 git clone https://github.com/seu-usuario/seu-projeto.git
 cd seu-projeto
-
+````
 ### 3. Configure variáveis de ambiente
 
-```criar arquivo .env
+- criar arquivo .env
+``` bash
 WORDPRESS_DB_NAME=wordpress
 WORDPRESS_DB_USER=wordpress
 WORDPRESS_DB_PASSWORD=wordpress
 MYSQL_ROOT_PASSWORD=rootpass
+```
 
 ### 4. Suba os containers
-- docker-compose up -d --build
-
+```bash
+docker-compose up -d --build
+```
 
 ### 5. 🔎 Acesse o projeto
 Serviço	Endereço
-WordPress	http://localhost:81
-phpMyAdmin	http://localhost:8081
+- WordPress	http://localhost:81
+- phpMyAdmin	http://localhost:8081
 

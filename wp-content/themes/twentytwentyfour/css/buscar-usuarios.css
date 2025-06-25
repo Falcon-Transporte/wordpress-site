@@ -1,0 +1,134 @@
+.buscar-usuarios-wrapper .search-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.buscar-usuarios-wrapper .search-container:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.buscar-usuarios-wrapper .search-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buscar-usuarios-wrapper .search-header h3 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #333;
+    letter-spacing: 0.5px;
+}
+
+.buscar-usuarios-wrapper .search-header .btn-add {
+    background: linear-gradient(145deg, #0073aa, #005e8a);
+    color: white;
+    font-weight: bold;
+    padding: 12px 24px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.buscar-usuarios-wrapper .search-header .btn-add:hover {
+    background: linear-gradient(145deg, #005e8a, #003f5c);
+    transform: scale(1.05);
+}
+
+.buscar-usuarios-wrapper .search-container form {
+    width: 100%;
+}
+
+.buscar-usuarios-wrapper .input-group {
+    display: flex;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.buscar-usuarios-wrapper .input-group input {
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 25px 0 0 25px;
+    transition: border-color 0.3s ease;
+}
+
+.buscar-usuarios-wrapper .input-group input:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #0073aa;
+}
+
+.buscar-usuarios-wrapper .input-group-append {
+    background: #0073aa;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    border-radius: 0 25px 25px 0;
+}
+
+.buscar-usuarios-wrapper .input-group-append .btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.buscar-usuarios-wrapper .user-results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.buscar-usuarios-wrapper .user-card {
+    background: #f9f9f9;
+    padding: 18px;
+    border-radius: 12px;
+    max-width: 300px;
+    min-width: 250px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Alinhamento mais natural */
+    text-align: left; /* <== Aqui é o principal ajuste */
+}
+
+.buscar-usuarios-wrapper .user-card h5,
+.buscar-usuarios-wrapper .user-card p {
+    text-align: left; /* <== Garantir que texto dentro também respeite o alinhamento */
+    width: 100%; /* <== Garante que ocupe todo o espaço */
+}
+
+
+.buscar-usuarios-wrapper .user-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    background-color: #f0f8ff;
+}
+
+.buscar-usuarios-wrapper .no-results {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+    margin-top: 20px;
+    width: 100%;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}

@@ -1,0 +1,164 @@
+/* === Container === */
+.custom-nav-container {
+    padding: 10px 20px;
+    border-radius: 5px;
+    position: relative;
+    background-color: #ffffff;
+    z-index: 1001;
+    box-sizing: border-box;
+}
+
+/* === Ícone do hambúrguer === */
+.hamburger {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #0A0092;
+    background: none;
+    border: none;
+}
+
+/* === Menu principal === */
+.custom-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.custom-menu-item {
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* === Links === */
+.custom-menu-link,
+.dropdown-toggle {
+    text-decoration: none;
+    color: #0A0092;
+    font-weight: bold;
+    padding: 10px 15px;
+    display: inline-block;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+    word-break: break-word;
+}
+
+.custom-menu-link:hover,
+.dropdown-toggle:hover {
+    color: #ffffff;
+    background-color: #0056b3;
+}
+
+/* === Dropdown === */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    min-width: 180px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 10px 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 12px 15px;
+    color: #0A0092;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    white-space: normal;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #e9ecef;
+    color: #0056b3;
+}
+
+/* Por esta */
+.custom-menu .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* === Responsivo: Telas pequenas e médias === */
+@media (max-width: 1024px) {
+    .custom-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .custom-menu {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        top: 60px;
+        right: 10px;
+        background-color: #ffffff;
+        width: 90vw;
+        max-width: 320px;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        z-index: 1000;
+    }
+
+    .custom-menu.active {
+        display: flex;
+    }
+
+    .dropdown-menu {
+        position: static;
+        display: none;
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .dropdown.active .dropdown-menu {
+        display: block;
+    }
+
+    .dropdown-menu li a {
+        background-color: #f9f9f9;
+        width: 100%;
+        border-radius: 5px;
+        padding: 12px 15px;
+    }
+}
+
+/* === Telas muito pequenas (<480px) === */
+@media (max-width: 480px) {
+
+    .custom-menu-link,
+    .dropdown-toggle {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .hamburger {
+        font-size: 26px;
+    }
+}

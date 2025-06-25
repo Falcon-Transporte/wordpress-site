@@ -1,0 +1,40 @@
+/* profile-style.css */
+
+#user-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 500px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-heading {
+    font-family: sans-serif;
+    text-align: center;
+    font-weight: bold;
+    color: #0A0092;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.profile-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.profile-field strong {
+    color: #0A0092;
+    display: inline-block;
+    width: auto;
+}
+
+.profile-field span {
+    color: #1f1d1d;
+}

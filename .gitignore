@@ -1,0 +1,25 @@
+# Ignorar core do WordPress (reconstruído via imagem)
+wp-admin/
+wp-includes/
+license.txt
+readme.html
+wp-*.php
+
+# Ignorar arquivos sensíveis e temporários
+.env
+*.log
+error_log
+.htaccess
+.htaccess.bk
+
+# Ignorar arquivos de backup
+*.bak
+*.bk
+
+# Node/npm (caso use futuramente)
+node_modules/
+dist/
+build/
+
+# Docker volumes locais
+volumes/

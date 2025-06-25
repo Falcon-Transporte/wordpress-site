@@ -34,6 +34,6 @@ docker-compose up -d --build
 
 ### 5. 🔎 Acesse o projeto
 Serviço	Endereço
-- WordPress	http://localhost:81
+- WordPress	http://localhost:80
 - phpMyAdmin	http://localhost:8081
 

@@ -23,7 +23,7 @@ function gerar_pdf_ocorrencia()
 		$usuario_id = $relatorio->user_id;
 		$user_info = get_userdata($usuario_id);
 		$nome_usuario = $user_info ? $user_info->display_name : 'Usuário desconhecido';
-		$descricao_ocorrencia = $relatorio ? htmlspecialchars_decode(stripslashes($relatorio->descricao), ENT_QUOTES) : '';
+		$descricao_ocorrencia = $tratativa ? htmlspecialchars_decode(stripslashes($tratativa->descricao_ocorrido), ENT_QUOTES) : '';
 		$numero_cat = $tratativa->numero_cat ? $tratativa->numero_cat : "NÃO APLICA";
 		$numero_os = $tratativa->numero_os ? $tratativa->numero_os : "NÃO APLICA";
 

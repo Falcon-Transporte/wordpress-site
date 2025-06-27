@@ -1,6 +1,5 @@
 FROM wordpress:latest
 
-COPY . /var/www/html
+COPY wp-content /var/www/html/wp-content
 
-RUN chown -R www-data:www-data /var/www/html \
- && chmod -R 755 /var/www/html
+RUN chown -R www-data:www-data /var/www/html/wp-content

@@ -31,12 +31,6 @@ function relatorio_formulario_shortcode()
 
 	$cargo_implicado = $dados_ocorrencia ? $dados_ocorrencia->cargo_implicado : '';
 
-	$modalidades_selecionadas = [];
-
-	if ($dados_ocorrencia && !empty($dados_ocorrencia->modalidade)) {
-		$modalidades_selecionadas = unserialize($dados_ocorrencia->modalidade);
-	}
-
 	$imagens_existentes = [];
 	if (isset($_GET['editar_id'])) {
 		$editar_id = intval($_GET['editar_id']);
@@ -90,22 +84,24 @@ function relatorio_formulario_shortcode()
 				<?php
 				$locais = [
 					'NÃO APLICA',
-					'ADENOR BONIFÁCIO',
+					'ALANA',
 					'ALCEU MAGALHÃES COUTINHO - PROF',
 					'ALFREDO GONÇALVES DA SILVA - VICE',
 					'ALI ALI',
 					'ANTONIA CICONE - DONA',
 					'ARISTIDES JACOB ALVARES',
 					'CHARLES HENRY TYLER TOWNSEND - DR',
+					'CHARLES MICHEL',
 					'CLARINDA DA CONCEIÇÃO',
+					'DANIELA BALDESSIN',
 					'ESCRITÓRIO',
 					'FLORO DA SILVA',
+					'FRANCISCA LEUDA',
 					'GARAGEM NOVA',
 					'GARAGEM SECRETARIA DE OBRAS',
 					'GUILHERME DONIZETE DOS SANTOS',
 					'HELENA SGARB',
 					'ISABEL ALVES DO PRADO',
-					'ÍTALO ADAMI',
 					'JOÃO MARQUES - VER',
 					'JOAQUIM PERPÉTUO',
 					'JOSÉ MARINHO FERREIRA',
@@ -114,12 +110,12 @@ function relatorio_formulario_shortcode()
 					'JURACI MARCHIONI - VICE PREF.',
 					'LEOLINO DOS SANTOS - VER',
 					'MANUTENÇÃO',
-					'MARIA EMÍLIA DE MORAES NASCIMENTO',
 					'NOSSA SENHORA DAS GRAÇAS - PARQUE',
 					'ORLANDO BENTO',
+					'OSVALDO FERREIRA PAULINO',
 					'ROSELI APARECIDA MENDES I - PROF.',
-					'ROSELI APARECIDA MENDES II - PROF',
-					'SHOZAYEMON SETOKUCHI',
+					'SHOZAYEMON SETOKUCHI I',
+					'SHOZAYEMON SETOKUCHI II',
 					'TRÂNSITO'
 				];
 
@@ -233,33 +229,6 @@ function relatorio_formulario_shortcode()
 			</script>
 
 		</div>
-
-		<!-- Modalidade -->
-		<div class="form-group">
-			<label for="modalidade">Selecione uma ou mais modalidades</label>
-			<select id="modalidade" name="modalidade[]" class="form-control selectpicker" multiple data-live-search="true" required>
-				<option value="" disabled <?php echo empty($modalidades_selecionadas) ? 'selected' : ''; ?>>Selecione</option>
-
-				<?php
-				$opcoes_modalidade = [
-					"OCORRÊNCIA EMEB (MOTORISTA, MONITORES, ALUNOS, ETC.)",
-					"ACIDENTE DE PERCURSO - TRÂNSITO (GARAGEM ATÉ EMEB/RETORNO)",
-					"ACIDENTE DE TRABALHO (EXCETO ACIDENTE DE PERCURSO)",
-					"ACIDENTE DE TRAJETO FUNCIONÁRIO",
-					"DIREÇÃO PERIGOSA NO TRÂNSITO",
-					"INCIDENTE (OCORRÊNCIA QUE PODERIA GERAR ACIDENTE DE TRABALHO)",
-					"MANUTENÇÃO E REPARO DE VEÍCULO",
-					"OUTROS"
-				];
-
-				foreach ($opcoes_modalidade as $opcao) {
-					$selected = in_array($opcao, $modalidades_selecionadas) ? 'selected' : '';
-					echo '<option value="' . esc_attr($opcao) . '" ' . $selected . '>' . esc_html($opcao) . '</option>';
-				}
-				?>
-			</select>
-		</div>
-
 
 		<input type="file" id="imagem_ocorrido" style="display:none;" />
 		<div id="upload-area" style="border: 1px dashed #ccc; padding: 20px; cursor: pointer;">
@@ -556,8 +525,6 @@ function relatorio_formulario_shortcode()
 		$implicado = !empty($_POST['com_quem_ocorreu']) ? sanitize_text_field($_POST['com_quem_ocorreu']) : (!empty($_POST['com_quem_ocorreu_hidden']) ? sanitize_text_field($_POST['com_quem_ocorreu_hidden']) : 'NÃO APLICA');
 		$cargo_implicado = isset($_POST['cargo_implicado']) ? sanitize_text_field($_POST['cargo_implicado']) : '';
 		$descricao = isset($_POST['descricao']) ? sanitize_textarea_field($_POST['descricao']) : '';
-		$modalidade = isset($_POST['modalidade']) ? $_POST['modalidade'] : [];
-		$modalidade_serialized = maybe_serialize($modalidade);
 
 		$erro_hora = false;
 
@@ -588,7 +555,6 @@ function relatorio_formulario_shortcode()
 					'local' => $local,
 					'implicado' => $implicado,
 					'cargo_implicado' => $cargo_implicado,
-					'modalidade' => $modalidade_serialized,
 					'descricao' => $descricao,
 				],
 				['id' => $editar_id]
@@ -624,7 +590,6 @@ function relatorio_formulario_shortcode()
 					'local' => $local,
 					'implicado' => $implicado,
 					'cargo_implicado' => $cargo_implicado,
-					'modalidade' => $modalidade_serialized,
 					'descricao' => $descricao,
 					'numero_protocolo' => $numero_protocolo,
 					'status' => 'pendente',

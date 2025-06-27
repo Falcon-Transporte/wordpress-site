@@ -4,6 +4,7 @@ wp-includes/
 license.txt
 readme.html
 wp-*.php
+upgrade-temp-backup
 
 # Ignorar arquivos sensíveis e temporários
 .env
@@ -11,6 +12,8 @@ wp-*.php
 error_log
 .htaccess
 .htaccess.bk
+
+wp-content/plugins/
 
 # Ignorar arquivos de backup
 *.bak

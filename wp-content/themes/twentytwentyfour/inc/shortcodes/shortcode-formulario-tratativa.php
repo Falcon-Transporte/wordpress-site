@@ -38,6 +38,9 @@ function formulario_tratativa_shortcode()
 	$descricao = '';
 	$observacao = '';
 	$medida_disciplinar = '';
+	$modalidade = [];
+	$descricao_ocorrido = '';
+
 
 	// Se houver tratativa, preencher os valores para edição
 	if ($tratativa_existente) {
@@ -57,7 +60,8 @@ function formulario_tratativa_shortcode()
 				$causa_raiz = !empty($raw_causa_raiz) ? [$raw_causa_raiz] : [];
 			}
 		}
-
+		$modalidade = maybe_unserialize($tratativa_existente->modalidade);
+		$descricao_ocorrido = $tratativa_existente->descricao_ocorrido;
 		$descricao = $tratativa_existente->resolucao_ocorrido;
 		$observacao = $tratativa_existente->observacao;
 		$medida_disciplinar = $tratativa_existente->medida_disciplinar;
@@ -73,12 +77,16 @@ function formulario_tratativa_shortcode()
 		$partes_lesada = isset($_POST['partes_lesada']) ? array_map('sanitize_text_field', $_POST['partes_lesada']) : array();
 		$causa_raiz = isset($_POST['causa_raiz']) ? array_map('sanitize_text_field', $_POST['causa_raiz']) : array();
 		$descricao = sanitize_textarea_field($_POST['descricao']);
+		$descricao_ocorrido = isset($_POST['descricao_ocorrido']) ? sanitize_textarea_field($_POST['descricao_ocorrido']) : '';
 		$observacao = sanitize_textarea_field($_POST['observacao']);
 		$medida_disciplinar = sanitize_text_field($_POST['medida_disciplinar']);
 		$data_criacao = current_time('Y-m-d');
 		$hora_criacao = current_time('H:i:s');
 		$status = 'concluído'; // O status do relatório é alterado para "concluído"
 		$responsavel_id = get_current_user_id(); // Usuário atual é o responsável
+		$modalidade = isset($_POST['modalidade']) ? $_POST['modalidade'] : [];
+		$modalidade_serialized = maybe_serialize($modalidade);
+
 
 		if ($tratativa_existente) {
 			$resultado = $wpdb->update(
@@ -93,7 +101,8 @@ function formulario_tratativa_shortcode()
 					'status' => $status,
 					'medida_disciplinar' => $medida_disciplinar,
 					'numero_os' => $numero_os,
-					'numero_cat' => $numero_cat
+					'numero_cat' => $numero_cat,
+					'modalidade' => $modalidade_serialized
 				),
 				array('id' => $tratativa_existente->id)
 			);
@@ -115,7 +124,8 @@ function formulario_tratativa_shortcode()
 					'status' => $status,
 					'medida_disciplinar' => $medida_disciplinar,
 					'numero_os' => $numero_os,
-					'numero_cat' => $numero_cat
+					'numero_cat' => $numero_cat,
+					'modalidade' => $modalidade_serialized
 				)
 			);
 
@@ -361,6 +371,38 @@ function formulario_tratativa_shortcode()
 											<option value="SIM" <?php selected($medida_disciplinar, 'sim'); ?>>Sim</option>
 											<option value="NÃO" <?php selected($medida_disciplinar, 'nao'); ?>>Não</option>
 										</select>
+									</div>
+
+									<!-- Modalidade -->
+									<div class="form-group">
+										<label for="modalidade">Selecione uma ou mais modalidades</label>
+										<select id="modalidade" name="modalidade[]" class="form-control selectpicker" multiple data-live-search="true" required>
+											<option value="" disabled <?php echo empty($modalidades_selecionadas) ? 'selected' : ''; ?>>Selecione</option>
+
+											<?php
+											$opcoes_modalidade = [
+												"OCORRÊNCIA EMEB (MOTORISTA, MONITORES, ALUNOS, ETC.)",
+												"ACIDENTE DE PERCURSO - TRÂNSITO (GARAGEM ATÉ EMEB/RETORNO)",
+												"ACIDENTE DE TRABALHO (EXCETO ACIDENTE DE PERCURSO)",
+												"ACIDENTE DE TRAJETO FUNCIONÁRIO",
+												"DIREÇÃO PERIGOSA NO TRÂNSITO",
+												"INCIDENTE (OCORRÊNCIA QUE PODERIA GERAR ACIDENTE DE TRABALHO)",
+												"MANUTENÇÃO E REPARO DE VEÍCULO",
+												"OUTROS"
+											];
+
+											foreach ($opcoes_modalidade as $opcao) {
+												$selected = in_array($opcao, $modalidade) ? 'selected' : '';
+												echo '<option value="' . esc_attr($opcao) . '" ' . $selected . '>' . esc_html($opcao) . '</option>';
+											}
+											?>
+										</select>
+									</div>
+									
+									<!-- Descrição -->
+									<div class="form-group">
+										<label for="descricao_ocorrido">Descrição do Ocorrido</label>
+										<textarea name="descricao_ocorrido" class="form-control" placeholder="Descrição" required><?= esc_textarea($descricao_ocorrido) ?></textarea>
 									</div>
 
 									<!-- Descrição -->

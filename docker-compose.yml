@@ -3,6 +3,8 @@ version: '3.8'
 services:
   wordpress:
     build: .
+    command: >
+      bash -c "./install-plugins.sh && docker-entrypoint.sh apache2-foreground"
     ports:
       - "80:80"
     environment:
